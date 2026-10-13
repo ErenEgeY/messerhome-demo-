@@ -1,4 +1,4 @@
-/* Genel Ayarlar & Renk Paleti (Beyaz & Bej Tonları) */
+/* Genel Ayarlar & Renk Paleti */
 :root {
   --bg-primary: #fdfbf7;
   --bg-secondary: #ffffff;
@@ -107,10 +107,19 @@ body {
   object-fit: contain;
   background-color: #ffffff;
   image-rendering: -webkit-optimize-contrast;
-  transition: transform 0.1s ease-out; /* Büyüteç efektinin akıcı olması için */
+  transition: transform 0.1s ease-out;
 }
 
-/* Sağ ve Sol Slider Okları */
+/* Model Viewer Gizleme/Konumlandırma (Arka planda hazır bekler) */
+model-viewer {
+  width: 0;
+  height: 0;
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Sağ ve Son Slider Okları */
 .slider-arrow {
   position: absolute;
   top: 50%;

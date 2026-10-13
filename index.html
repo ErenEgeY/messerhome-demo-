@@ -17,10 +17,11 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
-    <!-- Google Model Viewer Script -->
+    <!-- Google Model Viewer Script (Hızlı yükleme için defer eklendi) -->
     <script
       type="module"
       src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"
+      defer
     ></script>
   </head>
   <body>
@@ -52,7 +53,7 @@
           <!-- Aktif Büyük Görsel -->
           <img
             id="activeImage"
-            src="image_1512.webp"
+            src="image_2560_2.webp"
             alt="ZENNA Ekolojik Orta Sehpa"
             class="gallery-img"
           />
@@ -65,7 +66,7 @@
             <i class="fa-solid fa-chevron-right"></i>
           </button>
 
-          <!-- Gizli Model Viewer (AR Altyapısı için) -->
+          <!-- Optimize Edilmiş Model Viewer (AR Altyapısı - Gizli değil, şeffaf ve hafif) -->
           <model-viewer
             id="arModel"
             src="sehpa.glb"
@@ -75,14 +76,14 @@
             camera-controls
             auto-rotate
             disable-zoom
-            style="display: none"
+            loading="lazy"
           ></model-viewer>
         </div>
 
         <!-- Küçük Fotoğraf Seçicileri (Thumbnails) -->
         <div class="gallery-thumbs">
           <img
-            src="image_2560.webp"
+            src="image_2560_2.webp"
             alt="Thumbnail 1"
             class="thumb active"
             onclick="setImage(0)"
@@ -151,9 +152,9 @@
       </div>
     </main>
 
-    <!-- JavaScript Mantığı (Slider, Büyüteç ve AR) -->
+    <!-- JavaScript Mantığı -->
     <script>
-      const images = ["image_2560.webp", "image_1512.webp"];
+      const images = ["image_2560_2.webp", "image_1512.webp"];
       let currentIndex = 0;
 
       function setImage(index) {
@@ -197,12 +198,15 @@
         img.style.transform = "scale(1)";
       }
 
+      // AR Tetikleme (Kameranın hatasız açılması için optimize edildi)
       function startAR() {
         const modelViewer = document.getElementById("arModel");
-        if (modelViewer) {
+        if (modelViewer && typeof modelViewer.activateAR === "function") {
           modelViewer.activateAR();
         } else {
-          alert("AR sistemi yükleniyor, lütfen birkaç saniye bekleyin.");
+          alert(
+            "AR sistemi yükleniyor, lütfen internet bağlantınızı ve HTTPS desteğini kontrol edin.",
+          );
         }
       }
 
