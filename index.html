@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Messer home</title>
+    <link rel="stylesheet" href="style.css" />
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- FontAwesome Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <!-- Google Model Viewer Script (Hızlı yükleme ve AR desteği için güncel sürüm) -->
+    <script
+      type="module"
+      src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"
+    ></script>
+  </head>
+  <body>
+    <!-- Header / Navbar -->
+    <header class="navbar">
+      <div class="logo">ZENNA<span>DEKOR</span></div>
+      <nav>
+        <a href="#">Ana Sayfa</a>
+        <a href="#">Ürünler</a>
+        <a href="#">Hakkımızda</a>
+        <a href="#">İletişim</a>
+      </nav>
+      <div class="nav-icons">
+        <i class="fa-regular fa-heart"></i>
+        <i class="fa-solid fa-cart-shopping"></i>
+      </div>
+    </header>
+
+    <!-- Main Product Section -->
+    <main class="product-container">
+      <!-- Sol Taraf: Ürün Görsel Slider / 3D Alanı -->
+      <div class="product-gallery">
+        <div class="main-image-container">
+          <!-- Ürün Fotoğrafları (Slider mantığı için aktif görsel) -->
+          <img
+            id="activeImage"
+            src="image_2560.webp"
+            alt="ZENNA Ekolojik Orta Sehpa"
+            class="gallery-img active"
+          />
+          <img
+            src="image_1512 (1).jpg"
+            alt="ZENNA Ekolojik Orta Sehpa Açı"
+            class="gallery-img"
+          />
+
+          <!-- Gizli Model Viewer (AR Altyapısı için - Arayüzsüz) -->
+          <model-viewer
+            id="arModel"
+            src="sehpa.glb"
+            ios-src="sehpa.usdz"
+            ar
+            ar-modes="webxr scene-viewer quick-look"
+            camera-controls
+            auto-rotate
+            disable-zoom
+            style="display: none"
+          ></model-viewer>
+        </div>
+
+        <!-- Küçük Fotoğraf Seçicileri (Thumbnails) ve AR Butonu -->
+        <div class="gallery-thumbs">
+          <img
+            src="image_2560.webp"
+            alt="Thumbnail 1"
+            class="thumb active"
+            onclick="changeImage('image_2560.webp', 0)"
+          />
+          <img
+            src="image_1512 (1).jpg"
+            alt="Thumbnail 2"
+            class="thumb"
+            onclick="changeImage('image_1512 (1).jpg', 1)"
+          />
+        </div>
+
+        <!-- İstediğin Şeffaf "Odanda Gör" Butonu -->
+        <button class="ar-trigger-btn" onclick="startAR()">
+          <i class="fa-solid fa-cube"></i> Odanda Gör (AR)
+        </button>
+      </div>
+
+      <!-- Sağ Taraf: Ürün Detayları, Fiyat ve Satın Alma -->
+      <div class="product-details">
+        <span class="badge">Çok Satan / Ekolojik Serisi</span>
+        <h1>ZENNA EKOLOJİK Ahşap Dekoratif Orta Sehpa BEYAZ</h1>
+
+        <div class="rating">
+          <i class="fa-solid fa-star"></i>
+          <i class="fa-solid fa-star"></i>
+          <i class="fa-solid fa-star"></i>
+          <i class="fa-solid fa-star"></i>
+          <i class="fa-solid fa-star-half-stroke"></i>
+          <span>(48 Değerlendirme)</span>
+        </div>
+
+        <div class="price-box">
+          <span class="current-price">₺ 349.00</span>
+          <span class="old-price">₺ 450.00</span>
+        </div>
+
+        <p class="description">
+          Modern tasarımı ve ekolojik yapısıyla evinize doğallık katan ZENNA
+          Orta Sehpa; dayanıklı ahşap yüzeyi ve şık beyaz profilleriyle oturma
+          odanızın havasını anında değiştirir. Kolay kurulumludur.
+        </p>
+
+        <div class="options">
+          <label>Renk: <strong>Beyaz / Ahşap</strong></label>
+          <div class="color-options">
+            <span class="color-circle white active"></span>
+            <span class="color-circle walnut"></span>
+          </div>
+        </div>
+
+        <div class="purchase-actions">
+          <div class="quantity-selector">
+            <button onclick="decrementQty()">-</button>
+            <span id="qty">1</span>
+            <button onclick="incrementQty()">+</button>
+          </div>
+          <button class="add-to-cart-btn">Sepete Ekle</button>
+        </div>
+
+        <div class="features-list">
+          <div><i class="fa-solid fa-truck"></i> Aynı Gün Ücretsiz Kargo</div>
+          <div><i class="fa-solid fa-rotate-left"></i> 14 Gün Kolay İade</div>
+          <div><i class="fa-solid fa-shield-halved"></i> 2 Yıl Garanti</div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Küçük JavaScript Mantığı -->
+    <script>
+      // Görsel değiştirme fonksiyonu
+      function changeImage(src, index) {
+        document.getElementById("activeImage").src = src;
+
+        // Thumbnail aktiflik durumu
+        let thumbs = document.querySelectorAll(".thumb");
+        thumbs.forEach((t, i) => {
+          if (i === index) t.classList.add("active");
+          else t.classList.remove("active");
+        });
+      }
+
+      // AR Modunu Tetikleyen Fonksiyon (Model-viewer AR tetikleyicisi)
+      function startAR() {
+        const modelViewer = document.getElementById("arModel");
+        if (modelViewer) {
+          modelViewer.activateAR();
+        } else {
+          alert("AR sistemi yükleniyor, lütfen birkaç saniye bekleyin.");
+        }
+      }
+
+      // Miktar Arttırıp Azaltma
+      let count = 1;
+      function incrementQty() {
+        count++;
+        document.getElementById("qty").innerText = count;
+      }
+      function decrementQty() {
+        if (count > 1) count--;
+        document.getElementById("qty").innerText = count;
+      }
+    </script>
+  </body>
+</html>

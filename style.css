@@ -1,0 +1,328 @@
+/* Genel Ayarlar & Renk Paleti (Beyaz & Bej Tonları) */
+:root {
+  --bg-primary: #fdfbf7; /* Açık Bej / Krem */
+  --bg-secondary: #ffffff; /* Saf Beyaz */
+  --accent-color: #c5a880; /* Şık Bej / Kahve Alt Tonu */
+  --text-dark: #2c2c2c;
+  --text-muted: #777777;
+  --border-color: #efece6;
+  --transition: all 0.3s ease;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Plus Jakarta Sans", sans-serif;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-dark);
+  line-height: 1.6;
+}
+
+/* Navbar Tasarımı */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 8%;
+  background-color: var(--bg-secondary);
+  border-bottom: 1px solid var(--border-color);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.logo {
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.logo span {
+  color: var(--accent-color);
+}
+
+.navbar nav a {
+  text-decoration: none;
+  color: var(--text-dark);
+  margin: 0 20px;
+  font-weight: 500;
+  font-size: 15px;
+  transition: var(--transition);
+}
+
+.navbar nav a:hover {
+  color: var(--accent-color);
+}
+
+.nav-icons i {
+  font-size: 18px;
+  margin-left: 20px;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.nav-icons i:hover {
+  color: var(--accent-color);
+}
+
+/* Ana Ürün Alanı (Grid Yapısı) */
+.product-container {
+  max-width: 1200px;
+  margin: 50px auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 50px;
+  padding: 0 20px;
+}
+
+/* Sol Taraf: Görsel ve AR Butonu */
+.product-gallery {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.main-image-container {
+  width: 100%;
+  height: 450px;
+  background-color: var(--bg-secondary);
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+  position: relative;
+}
+
+.gallery-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: var(--transition);
+}
+
+.gallery-thumbs {
+  display: flex;
+  gap: 12px;
+}
+
+.thumb {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 10px;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.thumb.active,
+.thumb:hover {
+  border-color: var(--accent-color);
+}
+
+/* İstediğin Şeffaf "Odanda Gör" Butonu */
+.ar-trigger-btn {
+  width: 100%;
+  padding: 14px;
+  background: rgba(197, 168, 128, 0.15); /* Şeffaf Bej Arka Plan */
+  backdrop-filter: blur(8px);
+  border: 2px solid var(--accent-color);
+  color: var(--text-dark);
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 12px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: var(--transition);
+  box-shadow: 0 4px 15px rgba(197, 168, 128, 0.2);
+}
+
+.ar-trigger-btn:hover {
+  background: var(--accent-color);
+  color: #ffffff;
+  transform: translateY(-2px);
+}
+
+/* Sağ Taraf: Detaylar */
+.product-details {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.badge {
+  align-self: flex-start;
+  background-color: #f4efea;
+  color: var(--accent-color);
+  padding: 6px 12px;
+  font-size: 12px;
+  font-weight: 600;
+  border-radius: 20px;
+  margin-bottom: 15px;
+}
+
+.product-details h1 {
+  font-size: 26px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: var(--text-dark);
+}
+
+.rating {
+  color: #f59e0b;
+  font-size: 14px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.rating span {
+  color: var(--text-muted);
+}
+
+.price-box {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.current-price {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--text-dark);
+}
+
+.old-price {
+  font-size: 18px;
+  color: var(--text-muted);
+  text-decoration: line-through;
+}
+
+.description {
+  font-size: 15px;
+  color: var(--text-muted);
+  margin-bottom: 25px;
+}
+
+.options {
+  margin-bottom: 25px;
+}
+
+.options label {
+  font-size: 14px;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.color-options {
+  display: flex;
+  gap: 10px;
+}
+
+.color-circle {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 2px solid #ddd;
+}
+
+.color-circle.white {
+  background-color: #ffffff;
+}
+.color-circle.walnut {
+  background-color: #8b5a2b;
+}
+.color-circle.active {
+  border-color: var(--accent-color);
+  transform: scale(1.1);
+}
+
+.purchase-actions {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 30px;
+}
+
+.quantity-selector {
+  display: flex;
+  align-items: center;
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  padding: 0 10px;
+}
+
+.quantity-selector button {
+  background: none;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+  padding: 10px;
+  color: var(--text-dark);
+}
+
+.quantity-selector span {
+  padding: 0 15px;
+  font-weight: 600;
+}
+
+.add-to-cart-btn {
+  flex: 1;
+  background-color: var(--text-dark);
+  color: #ffffff;
+  border: none;
+  font-size: 16px;
+  font-weight: 600;
+  border-icons: 10px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.add-to-cart-btn:hover {
+  background-color: var(--accent-color);
+}
+
+.features-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  border-top: 1px solid var(--border-color);
+  padding-top: 20px;
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+.features-list div {
+  display: flex;
+  align-items: centter;
+  gap: 10px;
+}
+
+.features-list i {
+  color: var(--accent-color);
+}
+
+/* Responsive Tasarım (Mobil Uyum) */
+@media (max-width: 768px) {
+  .product-container {
+    grid-template-columns: 1fr;
+    margin: 20px auto;
+  }
+  .navbar {
+    padding: 15px 5%;
+  }
+}
