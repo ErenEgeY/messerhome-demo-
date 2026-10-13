@@ -17,11 +17,10 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
-    <!-- Google Model Viewer Script (Hızlı yükleme için defer eklendi) -->
+    <!-- Google Model Viewer Script -->
     <script
       type="module"
-      src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"
-      defer
+      src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.5.0/model-viewer.min.js"
     ></script>
   </head>
   <body>
@@ -42,21 +41,24 @@
 
     <!-- Main Product Section -->
     <main class="product-container">
-      <!-- Sol Taraf: Ürün Görsel Alanı, Büyüteç ve Ok Butonları -->
+      <!-- Sol Taraf: Ürün Görsel Alanı, Mercek Büyüteç ve Ok Butonları -->
       <div class="product-gallery">
         <div
           class="main-image-container"
           id="zoomContainer"
-          onmousemove="zoomIn(event)"
-          onmouseleave="zoomOut()"
+          onmousemove="lensMove(event)"
+          onmouseleave="lensLeave()"
         >
-          <!-- Aktif Büyük Görsel -->
+          <!-- Aktif Büyük Görsel (Belirttiğin isimler kullanıldı: image_2560 ve image_1512) -->
           <img
             id="activeImage"
-            src="image_2560_2.webp"
+            src="image_2560.webp"
             alt="ZENNA Ekolojik Orta Sehpa"
             class="gallery-img"
           />
+
+          <!-- Karenin İçinde Detay Gösteren Mercek (Büyüteç Kutusu) -->
+          <div id="imageLens" class="img-zoom-lens"></div>
 
           <!-- Sağ ve Sol Ok Tuşları -->
           <button class="slider-arrow prev-arrow" onclick="prevImage()">
@@ -66,7 +68,7 @@
             <i class="fa-solid fa-chevron-right"></i>
           </button>
 
-          <!-- Optimize Edilmiş Model Viewer (AR Altyapısı - Gizli değil, şeffaf ve hafif) -->
+          <!-- Hızlı AR Başlatma için Optimize Edilmiş Model Viewer -->
           <model-viewer
             id="arModel"
             src="sehpa.glb"
@@ -76,14 +78,15 @@
             camera-controls
             auto-rotate
             disable-zoom
-            loading="lazy"
+            loading="eager"
+            style="display: none"
           ></model-viewer>
         </div>
 
         <!-- Küçük Fotoğraf Seçicileri (Thumbnails) -->
         <div class="gallery-thumbs">
           <img
-            src="image_2560_2.webp"
+            src="image_2560.webp"
             alt="Thumbnail 1"
             class="thumb active"
             onclick="setImage(0)"
@@ -154,7 +157,7 @@
 
     <!-- JavaScript Mantığı -->
     <script>
-      const images = ["image_2560_2.webp", "image_1512.webp"];
+      const images = ["image_2560.webp", "image_1512.webp"];
       let currentIndex = 0;
 
       function setImage(index) {
@@ -179,34 +182,61 @@
         setImage(currentIndex);
       }
 
-      // Büyüteç (Zoom) Fonksiyonu
-      function zoomIn(e) {
+      // Karenin İçinde Detay Gösteren Profesyonel Mercek (Magnifier) Fonksiyonu
+      function lensMove(e) {
         const container = document.getElementById("zoomContainer");
+        const lens = document.getElementById("imageLens");
         const img = document.getElementById("activeImage");
+
+        lens.style.display = "block";
+
         const rect = container.getBoundingClientRect();
+        let x = e.clientX - rect.left;
+        let y = e.clientY - rect.top;
 
-        const x = ((e.clientX - rect.left) / container.offsetWidth) * 100;
-        const y = ((e.clientY - rect.top) / container.offsetHeight) * 100;
+        let lensWidth = lens.offsetWidth / 2;
+        let lensHeight = lens.offsetHeight / 2;
 
-        img.style.transformOrigin = `${x}% ${y}%`;
-        img.style.transform = "scale(2)";
+        if (x > container.offsetWidth) x = container.offsetWidth;
+        if (x < 0) x = 0;
+        if (y > container.offsetHeight) y = container.offsetHeight;
+        if (y < 0) y = 0;
+
+        let posX = x - lensWidth;
+        let posY = y - lensHeight;
+
+        if (posX > container.offsetWidth - lens.offsetWidth)
+          posX = container.offsetWidth - lens.offsetWidth;
+        if (posX < 0) posX = 0;
+        if (posY > container.offsetHeight - lens.offsetHeight)
+          posY = container.offsetHeight - lens.offsetHeight;
+        if (posY < 0) posY = 0;
+
+        lens.style.left = posX + "px";
+        lens.style.top = posY + "px";
+
+        let cx = img.naturalWidth / container.offsetWidth;
+        let cy = img.naturalHeight / container.offsetHeight;
+
+        lens.style.backgroundImage = `url('${img.src}')`;
+        lens.style.backgroundSize = `${img.naturalWidth * 1.5}px ${img.naturalHeight * 1.5}px`;
+        lens.style.backgroundPosition = `-${x * cx * 1.5 - lens.offsetWidth / 2}px -${y * cy * 1.5 - lens.offsetHeight / 2}px`;
       }
 
-      function zoomOut() {
-        const img = document.getElementById("activeImage");
-        img.style.transformOrigin = "center center";
-        img.style.transform = "scale(1)";
+      function lensLeave() {
+        const lens = document.getElementById("imageLens");
+        lens.style.display = "none";
       }
 
-      // AR Tetikleme (Kameranın hatasız açılması için optimize edildi)
+      // Hızlı AR Tetikleme
       function startAR() {
         const modelViewer = document.getElementById("arModel");
-        if (modelViewer && typeof modelViewer.activateAR === "function") {
-          modelViewer.activateAR();
-        } else {
-          alert(
-            "AR sistemi yükleniyor, lütfen internet bağlantınızı ve HTTPS desteğini kontrol edin.",
-          );
+        if (modelViewer) {
+          try {
+            modelViewer.activateAR();
+          } catch (e) {
+            console.error("AR başlatılamadı:", e);
+          }
         }
       }
 
