@@ -23,7 +23,7 @@ body {
   overflow-x: hidden;
 }
 
-/* Navbar Tasarımı */
+/* Navbar */
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -78,7 +78,7 @@ body {
   color: var(--accent-color);
 }
 
-/* Ana Ürün Alanı - Esnek ve Orantılı Grid */
+/* Ana Ürün Alanı - Ekran Küçülüp Büyürken Asla Kaymayan Grid */
 .product-container {
   max-width: 1200px;
   width: 90%;
@@ -96,7 +96,7 @@ body {
   width: 100%;
 }
 
-/* Büyüteç ve Slider Kapsayıcısı */
+/* Ana Görsel Kutusu */
 .main-image-container {
   width: 100%;
   height: 480px;
@@ -120,7 +120,7 @@ body {
   image-rendering: -webkit-optimize-contrast;
 }
 
-/* Karenin İçinde Detay Gösteren Mercek (Magnifier Lens) */
+/* Mercek Büyüteç (Lens) */
 .img-zoom-lens {
   position: absolute;
   border: 2px solid var(--accent-color);
@@ -135,6 +135,7 @@ body {
   z-index: 15;
 }
 
+/* Slider Okları */
 .slider-arrow {
   position: absolute;
   top: 50%;
@@ -167,6 +168,7 @@ body {
   right: 15px;
 }
 
+/* Küçük Thumbnails */
 .gallery-thumbs {
   display: flex;
   gap: 12px;
@@ -188,6 +190,7 @@ body {
   border-color: var(--accent-color);
 }
 
+/* Şeffaf AR Butonu */
 .ar-trigger-btn {
   width: 100%;
   padding: 14px;
@@ -213,6 +216,7 @@ body {
   transform: translateY(-2px);
 }
 
+/* Sağ Taraf - Ürün Detayları */
 .product-details {
   display: flex;
   flex-direction: column;
@@ -376,7 +380,7 @@ body {
   color: var(--accent-color);
 }
 
-/* Responsive Ölçeklendirme ve Ekran Optimizasyonları */
+/* Responsive Ölçeklendirme */
 @media (max-width: 900px) {
   .product-container {
     grid-template-columns: 1fr;

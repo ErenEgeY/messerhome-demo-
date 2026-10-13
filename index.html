@@ -1,263 +1,240 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="tr">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>
-      ZENNA EKOLOJİK Ahşap Dekoratif Orta Sehpa BEYAZ - Messerhome Style
-    </title>
-    <link rel="stylesheet" href="style.css" />
-    <!-- Google Fonts -->
-    <link
-      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
-    <!-- FontAwesome Icons -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    />
-    <!-- Google Model Viewer Script (En hızlı performans sürümü) -->
-    <script
-      type="module"
-      src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.5.0/model-viewer.min.js"
-    ></script>
-  </head>
-  <body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>ZENNA EKOLOJİK Ahşap Dekoratif Orta Sehpa BEYAZ - Messerhome Style</title>
+    
+    <!-- Hızlı CDN Bağlantısı -->
+    <link rel="preconnect" href="https://ajax.googleapis.com">
+    
+    <!-- Google Model Viewer Kütüphanesi (Referans koddaki sürüm) -->
+    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
+
+    <!-- Harici CSS ve İkonlar -->
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
     <!-- Header / Navbar -->
     <header class="navbar">
-      <div class="logo">Messerhome<span>Style</span></div>
-      <nav>
-        <a href="#">Ana Sayfa</a>
-        <a href="#">Ürünler</a>
-        <a href="#">Hakkımızda</a>
-        <a href="#">İletişim</a>
-      </nav>
-      <div class="nav-icons">
-        <i class="fa-regular fa-heart"></i>
-        <i class="fa-solid fa-cart-shopping"></i>
-      </div>
+        <div class="logo">Messerhome<span>Style</span></div>
+        <nav>
+            <a href="#">Ana Sayfa</a>
+            <a href="#">Ürünler</a>
+            <a href="#">Hakkımızda</a>
+            <a href="#">İletişim</a>
+        </nav>
+        <div class="nav-icons">
+            <i class="fa-regular fa-heart"></i>
+            <i class="fa-solid fa-cart-shopping"></i>
+        </div>
     </header>
 
     <!-- Main Product Section -->
     <main class="product-container">
-      <!-- Sol Taraf: Ürün Görsel Alanı, Mercek Büyüteç ve Ok Butonları -->
-      <div class="product-gallery">
-        <div
-          class="main-image-container"
-          id="zoomContainer"
-          onmousemove="lensMove(event)"
-          onmouseleave="lensLeave()"
-          ontouchmove="lensTouchMove(event)"
-          ontouchend="lensLeave()"
-        >
-          <!-- Aktif Büyük Görsel (Belirttiğin isimler: image_2560 ve image_1512) -->
-          <img
-            id="activeImage"
-            src="image_2560.webp"
-            alt="ZENNA Ekolojik Orta Sehpa"
-            class="gallery-img"
-          />
+        
+        <!-- Sol Taraf: Görsel Galerisi, Mercek Büyüteç ve AR Motoru -->
+        <div class="product-gallery">
+            <div class="main-image-container" id="zoomContainer" onmousemove="lensMove(event)" onmouseleave="lensLeave()" ontouchmove="lensTouchMove(event)" ontouchend="lensLeave()">
+                <!-- Aktif Büyük Görsel -->
+                <img id="activeImage" src="image_2560.webp" alt="ZENNA Ekolojik Orta Sehpa" class="gallery-img">
+                
+                <!-- Büyüteç Merceği (Karenin içindeki detay gösterici) -->
+                <div id="imageLens" class="img-zoom-lens"></div>
 
-          <!-- Karenin İçinde Detay Gösteren Mercek (Büyüteç Kutusu) -->
-          <div id="imageLens" class="img-zoom-lens"></div>
+                <!-- Slider Okları -->
+                <button class="slider-arrow prev-arrow" onclick="prevImage()"><i class="fa-solid fa-chevron-left"></i></button>
+                <button class="slider-arrow next-arrow" onclick="nextImage()"><i class="fa-solid fa-chevron-right"></i></button>
 
-          <!-- Sağ ve Sol Ok Tuşları -->
-          <button class="slider-arrow prev-arrow" onclick="prevImage()">
-            <i class="fa-solid fa-chevron-left"></i>
-          </button>
-          <button class="slider-arrow next-arrow" onclick="nextImage()">
-            <i class="fa-solid fa-chevron-right"></i>
-          </button>
+                <!-- REFERANS KODDAKİ MOTOR (ios-src en başta asla bağlanmaz!) -->
+                <model-viewer
+                    id="ar-viewer"
+                    src="sehpa.glb"
+                    alt="ZENNA Sehpa 3D Modeli"
+                    ar
+                    ar-modes="quick-look scene-viewer webxr"
+                    ar-scale="auto"
+                    ar-placement="floor"
+                    camera-controls
+                    interaction-prompt="none"
+                    touch-action="pan-y"
+                    shadow-intensity="0.8"
+                    shadow-softness="0.5"
+                    exposure="1.1"
+                    loading="eager"
+                    reveal="auto"
+                    style="display:none;"
+                ></model-viewer>
+            </div>
 
-          <!-- Hızlı ve Anında Açılan AR Model Viewer Motoru -->
-          <model-viewer
-            id="arModel"
-            src="sehpa.glb"
-            ios-src="sehpa.usdz"
-            ar
-            ar-modes="webxr scene-viewer quick-look"
-            camera-controls
-            auto-rotate
-            disable-zoom
-            loading="eager"
-            reveal="auto"
-            style="display: none"
-          ></model-viewer>
+            <!-- Küçük Fotoğraf Seçicileri -->
+            <div class="gallery-thumbs">
+                <img src="image_2560.webp" alt="Thumbnail 1" class="thumb active" onclick="setImage(0)">
+                <img src="image_1512.webp" alt="Thumbnail 2" class="thumb" onclick="setImage(1)">
+            </div>
+
+            <!-- Şeffaf "Odanda Gör" AR Butonu -->
+            <button class="ar-trigger-btn" onclick="startAR()">
+                <i class="fa-solid fa-cube"></i> Odanda Gör (AR)
+            </button>
         </div>
 
-        <!-- Küçük Fotoğraf Seçicileri (Thumbnails) -->
-        <div class="gallery-thumbs">
-          <img
-            src="image_2560.webp"
-            alt="Thumbnail 1"
-            class="thumb active"
-            onclick="setImage(0)"
-          />
-          <img
-            src="image_1512.webp"
-            alt="Thumbnail 2"
-            class="thumb"
-            onclick="setImage(1)"
-          />
+        <!-- Sağ Taraf: Ürün Detayları ve Satın Alma -->
+        <div class="product-details">
+            <span class="badge">Messerhome Style / Ekolojik Serisi</span>
+            <h1>ZENNA EKOLOJİK Ahşap Dekoratif Orta Sehpa BEYAZ</h1>
+            
+            <div class="rating">
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star-half-stroke"></i>
+                <span>(48 Değerlendirme)</span>
+            </div>
+
+            <div class="price-box">
+                <span class="current-price">₺ 349.00</span>
+                <span class="old-price">₺ 450.00</span>
+            </div>
+
+            <p class="description">
+                Modern tasarımı ve ekolojik yapısıyla evinize doğallık katan ZENNA Orta Sehpa; dayanıklı ahşap yüzeyi ve şık beyaz profilleriyle oturma odanızın havasını anında değiştirir. Kolay kurulumludur.
+            </p>
+
+            <div class="options">
+                <label>Renk: <strong>Beyaz / Ahşap</strong></label>
+                <div class="color-options">
+                    <span class="color-circle white active"></span>
+                    <span class="color-circle walnut"></span>
+                </div>
+            </div>
+
+            <div class="purchase-actions">
+                <div class="quantity-selector">
+                    <button onclick="decrementQty()">-</button>
+                    <span id="qty">1</span>
+                    <button onclick="incrementQty()">+</button>
+                </div>
+                <button class="add-to-cart-btn">Sepete Ekle</button>
+            </div>
+
+            <div class="features-list">
+                <div><i class="fa-solid fa-truck"></i> Aynı Gün Ücretsiz Kargo</div>
+                <div><i class="fa-solid fa-rotate-left"></i> 14 Gün Kolay İade</div>
+                <div><i class="fa-solid fa-shield-halved"></i> 2 Yıl Garanti</div>
+            </div>
         </div>
 
-        <!-- Şeffaf "Odanda Gör" Butonu -->
-        <button class="ar-trigger-btn" onclick="startAR()">
-          <i class="fa-solid fa-cube"></i> Odanda Gör (AR)
-        </button>
-      </div>
-
-      <!-- Sağ Taraf: Ürün Detayları, Fiyat ve Satın Alma -->
-      <div class="product-details">
-        <span class="badge">Messerhome Style / Ekolojik Serisi</span>
-        <h1>ZENNA EKOLOJİK Ahşap Dekoratif Orta Sehpa BEYAZ</h1>
-
-        <div class="rating">
-          <i class="fa-solid fa-star"></i>
-          <i class="fa-solid fa-star"></i>
-          <i class="fa-solid fa-star"></i>
-          <i class="fa-solid fa-star"></i>
-          <i class="fa-solid fa-star-half-stroke"></i>
-          <span>(48 Değerlendirme)</span>
-        </div>
-
-        <div class="price-box">
-          <span class="current-price">₺ 349.00</span>
-          <span class="old-price">₺ 450.00</span>
-        </div>
-
-        <p class="description">
-          Modern tasarımı ve ekolojik yapısıyla evinize doğallık katan ZENNA
-          Orta Sehpa; dayanıklı ahşap yüzeyi ve şık beyaz profilleriyle oturma
-          odanızın havasını anında değiştirir. Kolay kurulumludur.
-        </p>
-
-        <div class="options">
-          <label>Renk: <strong>Beyaz / Ahşap</strong></label>
-          <div class="color-options">
-            <span class="color-circle white active"></span>
-            <span class="color-circle walnut"></span>
-          </div>
-        </div>
-
-        <div class="purchase-actions">
-          <div class="quantity-selector">
-            <button onclick="decrementQty()">-</button>
-            <span id="qty">1</span>
-            <button onclick="incrementQty()">+</button>
-          </div>
-          <button class="add-to-cart-btn">Sepete Ekle</button>
-        </div>
-
-        <div class="features-list">
-          <div><i class="fa-solid fa-truck"></i> Aynı Gün Ücretsiz Kargo</div>
-          <div><i class="fa-solid fa-rotate-left"></i> 14 Gün Kolay İade</div>
-          <div><i class="fa-solid fa-shield-halved"></i> 2 Yıl Garanti</div>
-        </div>
-      </div>
     </main>
 
-    <!-- JavaScript Mantığı -->
     <script>
-      const images = ["image_2560.webp", "image_1512.webp"];
-      let currentIndex = 0;
+        const images = ["image_2560.webp", "image_1512.webp"];
+        let currentIndex = 0;
 
-      function setImage(index) {
-        currentIndex = index;
-        const mainImg = document.getElementById("activeImage");
-        mainImg.src = images[currentIndex];
-
-        let thumbs = document.querySelectorAll(".thumb");
-        thumbs.forEach((t, i) => {
-          if (i === currentIndex) t.classList.add("active");
-          else t.classList.remove("active");
-        });
-      }
-
-      function nextImage() {
-        currentIndex = (currentIndex + 1) % images.length;
-        setImage(currentIndex);
-      }
-
-      function prevImage() {
-        currentIndex = (currentIndex - 1 + images.length) % images.length;
-        setImage(currentIndex);
-      }
-
-      // Profesyonel Mercek Büyüteç (Magnifier) Fonksiyonu (Fare ve Dokunmatik Destekli)
-      function lensMove(e) {
-        const container = document.getElementById("zoomContainer");
-        const lens = document.getElementById("imageLens");
-        const img = document.getElementById("activeImage");
-
-        lens.style.display = "block";
-
-        const rect = container.getBoundingClientRect();
-        let x = e.clientX - rect.left;
-        let y = e.clientY - rect.top;
-
-        let lensWidth = lens.offsetWidth / 2;
-        let lensHeight = lens.offsetHeight / 2;
-
-        if (x > container.offsetWidth) x = container.offsetWidth;
-        if (x < 0) x = 0;
-        if (y > container.offsetHeight) y = container.offsetHeight;
-        if (y < 0) y = 0;
-
-        let posX = x - lensWidth;
-        let posY = y - lensHeight;
-
-        if (posX > container.offsetWidth - lens.offsetWidth)
-          posX = container.offsetWidth - lens.offsetWidth;
-        if (posX < 0) posX = 0;
-        if (posY > container.offsetHeight - lens.offsetHeight)
-          posY = container.offsetHeight - lens.offsetHeight;
-        if (posY < 0) posY = 0;
-
-        lens.style.left = posX + "px";
-        lens.style.top = posY + "px";
-
-        let cx = img.naturalWidth / container.offsetWidth;
-        let cy = img.naturalHeight / container.offsetHeight;
-
-        lens.style.backgroundImage = `url('${img.src}')`;
-        lens.style.backgroundSize = `${img.naturalWidth * 1.8}px ${img.naturalHeight * 1.8}px`;
-        lens.style.backgroundPosition = `-${x * cx * 1.8 - lens.offsetWidth / 2}px -${y * cy * 1.8 - lens.offsetHeight / 2}px`;
-      }
-
-      function lensTouchMove(e) {
-        if (e.touches.length > 0) {
-          lensMove(e.touches[0]);
+        function setImage(index) {
+            currentIndex = index;
+            const mainImg = document.getElementById('activeImage');
+            mainImg.src = images[currentIndex];
+            
+            let thumbs = document.querySelectorAll('.thumb');
+            thumbs.forEach((t, i) => {
+                if(i === currentIndex) t.classList.add('active');
+                else t.classList.remove('active');
+            });
         }
-      }
 
-      function lensLeave() {
-        const lens = document.getElementById("imageLens");
-        lens.style.display = "none";
-      }
-
-      // Anında Tetiklenen Hızlı AR Motoru
-      function startAR() {
-        const modelViewer = document.getElementById("arModel");
-        if (modelViewer) {
-          try {
-            modelViewer.activateAR();
-          } catch (e) {
-            console.error("AR başlatılamadı:", e);
-          }
+        function nextImage() {
+            currentIndex = (currentIndex + 1) % images.length;
+            setImage(currentIndex);
         }
-      }
 
-      let count = 1;
-      function incrementQty() {
-        count++;
-        document.getElementById("qty").innerText = count;
-      }
-      function decrementQty() {
-        if (count > 1) count--;
-        document.getElementById("qty").innerText = count;
-      }
+        function prevImage() {
+            currentIndex = (currentIndex - 1 + images.length) % images.length;
+            setImage(currentIndex);
+        }
+
+        // Büyüteç Merceği Fonksiyonu
+        function lensMove(e) {
+            const container = document.getElementById('zoomContainer');
+            const lens = document.getElementById('imageLens');
+            const img = document.getElementById('activeImage');
+            
+            lens.style.display = 'block';
+            
+            const rect = container.getBoundingClientRect();
+            let x = e.clientX - rect.left;
+            let y = e.clientY - rect.top;
+
+            let lensWidth = lens.offsetWidth / 2;
+            let lensHeight = lens.offsetHeight / 2;
+
+            if (x > container.offsetWidth) x = container.offsetWidth;
+            if (x < 0) x = 0;
+            if (y > container.offsetHeight) y = container.offsetHeight;
+            if (y < 0) y = 0;
+
+            let posX = x - lensWidth;
+            let posY = y - lensHeight;
+
+            if (posX > container.offsetWidth - lens.offsetWidth) posX = container.offsetWidth - lens.offsetWidth;
+            if (posX < 0) posX = 0;
+            if (posY > container.offsetHeight - lens.offsetHeight) posY = container.offsetHeight - lens.offsetHeight;
+            if (posY < 0) posY = 0;
+
+            lens.style.left = posX + 'px';
+            lens.style.top = posY + 'px';
+
+            let cx = img.naturalWidth / container.offsetWidth;
+            let cy = img.naturalHeight / container.offsetHeight;
+
+            lens.style.backgroundImage = `url('${img.src}')`;
+            lens.style.backgroundSize = `${img.naturalWidth * 1.8}px ${img.naturalHeight * 1.8}px`;
+            lens.style.backgroundPosition = `-${x * cx * 1.8 - lens.offsetWidth / 2}px -${y * cy * 1.8 - lens.offsetHeight / 2}px`;
+        }
+
+        function lensTouchMove(e) {
+            if (e.touches.length > 0) {
+                lensMove(e.touches[0]);
+            }
+        }
+
+        function lensLeave() {
+            const lens = document.getElementById('imageLens');
+            lens.style.display = 'none';
+        }
+
+        // REFERANS KODUN KULLANDIĞI ON-DEMAND AR TETİKLEME YÖNTEMİ
+        function startAR() {
+            const viewer = document.getElementById("ar-viewer");
+            const isIOS = (/iPad|iPhone|iPod/.test(navigator.userAgent) || 
+                          (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1)) && 
+                          !window.MSStream;
+
+            if (isIOS) {
+                // iPhone ise SADECE ŞİMDİ ios-src'yi bağla ve kamerayı aç!
+                viewer.setAttribute("ios-src", "sehpa.usdz");
+            }
+
+            if (typeof viewer.activateAR === "function") {
+                viewer.activateAR();
+            } else {
+                alert("AR desteği bu cihazda aktif değil veya model henüz hazırlanıyor.");
+            }
+        }
+
+        let count = 1;
+        function incrementQty() {
+            count++;
+            document.getElementById('qty').innerText = count;
+        }
+        function decrementQty() {
+            if(count > 1) count--;
+            document.getElementById('qty').innerText = count;
+        }
     </script>
-  </body>
+</body>
 </html>
