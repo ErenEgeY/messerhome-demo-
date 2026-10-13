@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Messer home</title>
+    <title>ZENNA EKOLOJİK Ahşap Dekoratif Orta Sehpa BEYAZ - E-Ticaret</title>
     <link rel="stylesheet" href="style.css" />
     <!-- Google Fonts -->
     <link
@@ -15,7 +15,7 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
-    <!-- Google Model Viewer Script (Hızlı yükleme ve AR desteği için güncel sürüm) -->
+    <!-- Google Model Viewer Script -->
     <script
       type="module"
       src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"
@@ -42,20 +42,21 @@
       <!-- Sol Taraf: Ürün Görsel Slider / 3D Alanı -->
       <div class="product-gallery">
         <div class="main-image-container">
-          <!-- Ürün Fotoğrafları (Slider mantığı için aktif görsel) -->
+          <!-- Güncellenen Görsel İsimleri -->
           <img
             id="activeImage"
-            src="image_2560.webp"
+            src="image_2560_2.webp"
             alt="ZENNA Ekolojik Orta Sehpa"
             class="gallery-img active"
           />
           <img
-            src="image_1512 (1).jpg"
+            src="image_1512.webp"
             alt="ZENNA Ekolojik Orta Sehpa Açı"
             class="gallery-img"
+            style="display: none"
           />
 
-          <!-- Gizli Model Viewer (AR Altyapısı için - Arayüzsüz) -->
+          <!-- Gizli Model Viewer (AR Altyapısı için) -->
           <model-viewer
             id="arModel"
             src="sehpa.glb"
@@ -69,23 +70,23 @@
           ></model-viewer>
         </div>
 
-        <!-- Küçük Fotoğraf Seçicileri (Thumbnails) ve AR Butonu -->
+        <!-- Küçük Fotoğraf Seçicileri (Thumbnails) -->
         <div class="gallery-thumbs">
           <img
-            src="image_2560.webp"
+            src="image_2560_2.webp"
             alt="Thumbnail 1"
             class="thumb active"
-            onclick="changeImage('image_2560.webp', 0)"
+            onclick="changeImage('image_2560_2.webp', 0)"
           />
           <img
-            src="image_1512 (1).jpg"
+            src="image_1512.webp"
             alt="Thumbnail 2"
             class="thumb"
-            onclick="changeImage('image_1512 (1).jpg', 1)"
+            onclick="changeImage('image_1512.webp', 1)"
           />
         </div>
 
-        <!-- İstediğin Şeffaf "Odanda Gör" Butonu -->
+        <!-- Şeffaf "Odanda Gör" Butonu -->
         <button class="ar-trigger-btn" onclick="startAR()">
           <i class="fa-solid fa-cube"></i> Odanda Gör (AR)
         </button>
@@ -141,13 +142,12 @@
       </div>
     </main>
 
-    <!-- Küçük JavaScript Mantığı -->
     <script>
-      // Görsel değiştirme fonksiyonu
       function changeImage(src, index) {
-        document.getElementById("activeImage").src = src;
+        const mainImg = document.getElementById("activeImage");
+        mainImg.src = src;
+        mainImg.style.display = "block";
 
-        // Thumbnail aktiflik durumu
         let thumbs = document.querySelectorAll(".thumb");
         thumbs.forEach((t, i) => {
           if (i === index) t.classList.add("active");
@@ -155,7 +155,6 @@
         });
       }
 
-      // AR Modunu Tetikleyen Fonksiyon (Model-viewer AR tetikleyicisi)
       function startAR() {
         const modelViewer = document.getElementById("arModel");
         if (modelViewer) {
@@ -165,7 +164,6 @@
         }
       }
 
-      // Miktar Arttırıp Azaltma
       let count = 1;
       function incrementQty() {
         count++;
