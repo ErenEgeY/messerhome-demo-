@@ -17,7 +17,7 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
-    <!-- Google Model Viewer Script -->
+    <!-- Google Model Viewer Script (En hızlı performans sürümü) -->
     <script
       type="module"
       src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.5.0/model-viewer.min.js"
@@ -48,8 +48,10 @@
           id="zoomContainer"
           onmousemove="lensMove(event)"
           onmouseleave="lensLeave()"
+          ontouchmove="lensTouchMove(event)"
+          ontouchend="lensLeave()"
         >
-          <!-- Aktif Büyük Görsel (Belirttiğin isimler kullanıldı: image_2560 ve image_1512) -->
+          <!-- Aktif Büyük Görsel (Belirttiğin isimler: image_2560 ve image_1512) -->
           <img
             id="activeImage"
             src="image_2560.webp"
@@ -68,7 +70,7 @@
             <i class="fa-solid fa-chevron-right"></i>
           </button>
 
-          <!-- Hızlı AR Başlatma için Optimize Edilmiş Model Viewer -->
+          <!-- Hızlı ve Anında Açılan AR Model Viewer Motoru -->
           <model-viewer
             id="arModel"
             src="sehpa.glb"
@@ -79,6 +81,7 @@
             auto-rotate
             disable-zoom
             loading="eager"
+            reveal="auto"
             style="display: none"
           ></model-viewer>
         </div>
@@ -182,7 +185,7 @@
         setImage(currentIndex);
       }
 
-      // Karenin İçinde Detay Gösteren Profesyonel Mercek (Magnifier) Fonksiyonu
+      // Profesyonel Mercek Büyüteç (Magnifier) Fonksiyonu (Fare ve Dokunmatik Destekli)
       function lensMove(e) {
         const container = document.getElementById("zoomContainer");
         const lens = document.getElementById("imageLens");
@@ -219,8 +222,14 @@
         let cy = img.naturalHeight / container.offsetHeight;
 
         lens.style.backgroundImage = `url('${img.src}')`;
-        lens.style.backgroundSize = `${img.naturalWidth * 1.5}px ${img.naturalHeight * 1.5}px`;
-        lens.style.backgroundPosition = `-${x * cx * 1.5 - lens.offsetWidth / 2}px -${y * cy * 1.5 - lens.offsetHeight / 2}px`;
+        lens.style.backgroundSize = `${img.naturalWidth * 1.8}px ${img.naturalHeight * 1.8}px`;
+        lens.style.backgroundPosition = `-${x * cx * 1.8 - lens.offsetWidth / 2}px -${y * cy * 1.8 - lens.offsetHeight / 2}px`;
+      }
+
+      function lensTouchMove(e) {
+        if (e.touches.length > 0) {
+          lensMove(e.touches[0]);
+        }
       }
 
       function lensLeave() {
@@ -228,7 +237,7 @@
         lens.style.display = "none";
       }
 
-      // Hızlı AR Tetikleme
+      // Anında Tetiklenen Hızlı AR Motoru
       function startAR() {
         const modelViewer = document.getElementById("arModel");
         if (modelViewer) {

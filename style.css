@@ -124,12 +124,12 @@ body {
 .img-zoom-lens {
   position: absolute;
   border: 2px solid var(--accent-color);
-  border-radius: 50%; /* Şık dairesel büyüteç merceği */
+  border-radius: 50%;
   cursor: crosshair;
-  width: 140px;
-  height: 140px;
+  width: 150px;
+  height: 150px;
   display: none;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
   pointer-events: none;
   background-repeat: no-repeat;
   z-index: 15;
