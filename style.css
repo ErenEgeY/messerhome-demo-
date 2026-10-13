@@ -1,8 +1,8 @@
 /* Genel Ayarlar & Renk Paleti (Beyaz & Bej Tonları) */
 :root {
-  --bg-primary: #fdfbf7; /* Açık Bej / Krem */
-  --bg-secondary: #ffffff; /* Saf Beyaz */
-  --accent-color: #c5a880; /* Şık Bej / Kahve Alt Tonu */
+  --bg-primary: #fdfbf7;
+  --bg-secondary: #ffffff;
+  --accent-color: #c5a880;
   --text-dark: #2c2c2c;
   --text-muted: #777777;
   --border-color: #efece6;
@@ -69,7 +69,7 @@ body {
   color: var(--accent-color);
 }
 
-/* Ana Ürün Alanı (Grid Yapısı) */
+/* Ana Ürün Alanı */
 .product-container {
   max-width: 1200px;
   margin: 50px auto;
@@ -79,16 +79,16 @@ body {
   padding: 0 20px;
 }
 
-/* Sol Taraf: Görsel ve AR Butonu */
 .product-gallery {
   display: flex;
   flex-direction: column;
   gap: 15px;
 }
 
+/* Büyüteç ve Slider Kapsayıcısı */
 .main-image-container {
   width: 100%;
-  height: 450px;
+  height: 500px;
   background-color: var(--bg-secondary);
   border-radius: 16px;
   overflow: hidden;
@@ -98,13 +98,49 @@ body {
   justify-content: center;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
   position: relative;
+  cursor: zoom-in;
 }
 
 .gallery-img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
+  background-color: #ffffff;
+  image-rendering: -webkit-optimize-contrast;
+  transition: transform 0.1s ease-out; /* Büyüteç efektinin akıcı olması için */
+}
+
+/* Sağ ve Sol Slider Okları */
+.slider-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid var(--border-color);
+  color: var(--text-dark);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
   transition: var(--transition);
+  z-index: 10;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.slider-arrow:hover {
+  background: var(--accent-color);
+  color: #ffffff;
+  border-color: var(--accent-color);
+}
+
+.prev-arrow {
+  left: 15px;
+}
+.next-arrow {
+  right: 15px;
 }
 
 .gallery-thumbs {
@@ -120,6 +156,7 @@ body {
   border: 2px solid transparent;
   cursor: pointer;
   transition: var(--transition);
+  background-color: #fff;
 }
 
 .thumb.active,
@@ -127,11 +164,10 @@ body {
   border-color: var(--accent-color);
 }
 
-/* İstediğin Şeffaf "Odanda Gör" Butonu */
 .ar-trigger-btn {
   width: 100%;
   padding: 14px;
-  background: rgba(197, 168, 128, 0.15); /* Şeffaf Bej Arka Plan */
+  background: rgba(197, 168, 128, 0.15);
   backdrop-filter: blur(8px);
   border: 2px solid var(--accent-color);
   color: var(--text-dark);
@@ -153,7 +189,6 @@ body {
   transform: translateY(-2px);
 }
 
-/* Sağ Taraf: Detaylar */
 .product-details {
   display: flex;
   flex-direction: column;
@@ -286,7 +321,6 @@ body {
   border: none;
   font-size: 16px;
   font-weight: 600;
-  border-icons: 10px;
   border-radius: 10px;
   cursor: pointer;
   transition: var(--transition);
@@ -308,7 +342,7 @@ body {
 
 .features-list div {
   display: flex;
-  align-items: centter;
+  align-items: center;
   gap: 10px;
 }
 
@@ -316,7 +350,6 @@ body {
   color: var(--accent-color);
 }
 
-/* Responsive Tasarım (Mobil Uyum) */
 @media (max-width: 768px) {
   .product-container {
     grid-template-columns: 1fr;
