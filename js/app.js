@@ -43,7 +43,14 @@ async function loadProduct() {
       .single();
 
     if (error || !data) {
-      console.error("Ürün çekilemedi:", error);
+      console.error(
+        "Supabase Hatası:",
+        error ? error.message : "Veri bulunamadı",
+        "| Kod:",
+        error ? error.code : "",
+        "| İpucu:",
+        error ? error.hint : "",
+      );
       document.getElementById("productTitle").innerText = "Ürün Bulunamadı";
       return;
     }
@@ -70,10 +77,10 @@ function renderProductData(prod) {
   document.getElementById("variantLabel").innerText =
     prod.id === "zenna" ? "Beyaz / Ahşap" : "Doğal Ahşap / Siyah Profil";
 
-  // 3D Model Bağlantısı (assets/models/...)
+  // 3D Model Bağlantısı
   arViewer.setAttribute("src", prod.glb_url);
 
-  // Görselleri Render Et (assets/images/...)
+  // Görselleri Render Et
   activeImages = prod.images;
   currentIndex = 0;
 
@@ -172,7 +179,7 @@ function setupZoom() {
   });
 }
 
-// iOS Quick Look AR Motoru (Cache Busting Zaman Damgası ile)
+// iOS Quick Look AR Motoru
 function startAR() {
   if (!currentProduct) return;
 
