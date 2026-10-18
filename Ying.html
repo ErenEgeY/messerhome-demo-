@@ -34,8 +34,8 @@
     <header class="navbar">
       <div class="logo">MESSER</div>
       <nav class="nav-links">
-        <a href="index.html" class="nav-item">ZENNA Sehpa</a>
-        <a href="ying.html" class="nav-item active">YING Modüler Sehpa</a>
+        <a href="./index.html" class="nav-item">ZENNA Sehpa</a>
+        <a href="./ying.html" class="nav-item active">YING Modüler Sehpa</a>
         <a href="#" class="nav-item">Lambaderler</a>
         <a href="#" class="nav-item">Yan Sehpa</a>
         <a href="#" class="nav-item">Mutfak & Banyo</a>
@@ -57,10 +57,10 @@
     <!-- Ürün Geçiş Menüsü -->
     <div class="product-switch-bar">
       <span class="switch-title">Modellerimiz:</span>
-      <a href="index.html" class="switch-chip"
+      <a href="./index.html" class="switch-chip"
         ><i class="fa-solid fa-circle-check"></i> ZENNA Beyaz Sehpa</a
       >
-      <a href="ying.html" class="switch-chip active"
+      <a href="./ying.html" class="switch-chip active"
         ><i class="fa-solid fa-layer-group"></i> YING Modüler Sehpa</a
       >
     </div>
@@ -75,17 +75,17 @@
           <div class="thumb-list">
             <div
               class="thumb-card active"
-              onclick="changeImage('ying 1.webp', 0)"
+              onclick="changeImage('ying1.webp', 0)"
             >
               <img src="ying1.webp" alt="YING Sehpa Görsel 1" />
             </div>
-            <div class="thumb-card" onclick="changeImage('ying 2.webp', 1)">
+            <div class="thumb-card" onclick="changeImage('ying2.webp', 1)">
               <img src="ying2.webp" alt="YING Sehpa Görsel 2" />
             </div>
           </div>
         </div>
 
-        <!-- Orta Büyük Görsel (Kırpılmayan Oransal Kutu) -->
+        <!-- Orta Büyük Görsel (Oransal ve Net) -->
         <div class="main-image-wrapper">
           <div class="image-box" id="imageBox">
             <img
@@ -109,7 +109,7 @@
             <i class="fa-solid fa-cube"></i> Odanda Gör (AR)
           </button>
 
-          <!-- On-Demand AR Motoru (ying.glb & ying.usdz) -->
+          <!-- On-Demand Hızlı AR Motoru -->
           <model-viewer
             id="ar-viewer"
             src="ying.glb"
@@ -282,7 +282,7 @@
 
       setupZoom();
 
-      // Hafif ve Ön Bellek Şişirmeyen AR Tetikleyici
+      // iOS ve Android İçin Bellek Şişirmeyen AR Tetikleyici
       function startAR() {
         const viewer = document.getElementById("ar-viewer");
         const isIOS =
