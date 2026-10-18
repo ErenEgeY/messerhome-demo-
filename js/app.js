@@ -1,6 +1,6 @@
 // 1. SUPABASE AYARLARI
 const SUPABASE_URL = "https://slsbrbazrilierlvvwdw.supabase.co";
-const SUPABASE_ANON_KEY = "sb_secret_ppUewtpFD7Xe6UqSPEDTPA_-DWbk-xt";
+const SUPABASE_ANON_KEY = "sb_publishable_unKExIZI99SR2zC19KV1eg_0deibIQb";
 
 const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
