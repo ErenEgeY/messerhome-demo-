@@ -118,7 +118,7 @@ body {
   transition: var(--transition);
 }
 
-/* Üst Ürün Geçiş Menüsü: Mobilde Taşmayan Esnek Yapı */
+/* Üst Ürün Geçiş Menüsü */
 .product-switch-bar {
   max-width: 1300px;
   width: 100%;
@@ -185,7 +185,7 @@ body {
   min-width: 0;
 }
 
-/* Dikey Thumbnail Sütunu */
+/* Dikey Küçük Görseller */
 .thumb-column {
   display: flex;
   flex-direction: column;
@@ -235,7 +235,7 @@ body {
   object-fit: contain;
 }
 
-/* Ana Görsel Kutusu */
+/* Ana Görsel Kutusu: Kırpmayan Oransal Tasarım */
 .main-image-wrapper {
   flex: 1;
   display: flex;

@@ -53,7 +53,7 @@
       </div>
     </header>
 
-    <!-- Hızlı Ürün Geçiş Menüsü -->
+    <!-- Modeller Arası Hızlı Geçiş -->
     <div class="product-switch-bar">
       <span class="switch-title">Modellerimiz:</span>
       <a href="index.html" class="switch-chip active"
@@ -114,7 +114,7 @@
             <i class="fa-solid fa-cube"></i> Odanda Gör (AR)
           </button>
 
-          <!-- On-Demand AR Motoru -->
+          <!-- Canlı Renk Motoruna Sahip AR Görüntüleyici -->
           <model-viewer
             id="ar-viewer"
             src="sehpa.glb"
@@ -126,15 +126,18 @@
             camera-controls
             interaction-prompt="none"
             touch-action="pan-y"
-            shadow-intensity="0.8"
-            shadow-softness="0.5"
-            exposure="1.1"
+            shadow-intensity="1.2"
+            shadow-softness="0.4"
+            exposure="1.0"
+            tone-mapping="neutral"
+            environment-image="neutral"
             loading="eager"
             reveal="auto"
             style="display: none"
           ></model-viewer>
         </div>
 
+        <!-- Sağ Büyütme Penceresi -->
         <div id="zoomResult" class="zoom-result-window"></div>
       </div>
 
