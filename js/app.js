@@ -1,6 +1,7 @@
 // 1. SUPABASE AYARLARI
 const SUPABASE_URL = "https://slsbrbazrilierlvvwdw.supabase.co";
-const SUPABASE_ANON_KEY = "sb_publishable_unKExIZI99SR2zC19KV1eg_0deibIQb";
+const SUPABASE_ANON_KEY =
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNsc2JyYmF6cmlsaWVybHZ2d2R3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTIzMzMyNDYsImV4cCI6MjEwNzkwOTI0Nn0.9kKCxbubU7hcBn_xk-RpSIj6MMUUGWlny_RmejPmNac";
 
 const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
