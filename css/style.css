@@ -17,7 +17,6 @@
   font-family: "Plus Jakarta Sans", sans-serif;
 }
 
-/* Sayfanın Sağa-Sola Kaymasını Engelleyen Donanımsal Kilit */
 html,
 body {
   width: 100%;
@@ -29,7 +28,6 @@ body {
   color: var(--text-primary);
 }
 
-/* Üst Duyuru */
 .top-announcement {
   width: 100%;
   background-color: var(--accent-dark);
@@ -41,7 +39,6 @@ body {
   letter-spacing: 0.8px;
 }
 
-/* Navbar */
 .navbar {
   width: 100%;
   display: flex;
@@ -118,7 +115,6 @@ body {
   transition: var(--transition);
 }
 
-/* Üst Ürün Geçiş Menüsü */
 .product-switch-bar {
   max-width: 1300px;
   width: 100%;
@@ -164,7 +160,6 @@ body {
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.12);
 }
 
-/* Ana Düzen */
 .product-layout {
   max-width: 1300px;
   width: 100%;
@@ -176,7 +171,6 @@ body {
   position: relative;
 }
 
-/* Sol Galeri Alanı */
 .product-gallery-section {
   display: flex;
   gap: 16px;
@@ -185,7 +179,6 @@ body {
   min-width: 0;
 }
 
-/* Dikey Küçük Görseller */
 .thumb-column {
   display: flex;
   flex-direction: column;
@@ -235,7 +228,6 @@ body {
   object-fit: contain;
 }
 
-/* Ana Görsel Kutusu: Kırpmayan Oransal Tasarım */
 .main-image-wrapper {
   flex: 1;
   display: flex;
@@ -272,7 +264,6 @@ body {
   image-rendering: -webkit-optimize-contrast;
 }
 
-/* Slider Ok Butonları */
 .slider-arrow {
   position: absolute;
   top: 50%;
@@ -304,7 +295,6 @@ body {
   right: 10px;
 }
 
-/* Büyüteç Lensi */
 .zoom-lens {
   position: absolute;
   width: 140px;
@@ -320,7 +310,6 @@ body {
   display: block;
 }
 
-/* Sağ Büyütme Penceresi */
 .zoom-result-window {
   position: absolute;
   top: 0;
@@ -341,7 +330,6 @@ body {
   display: block;
 }
 
-/* AR Butonu */
 .ar-trigger-btn {
   width: 100%;
   padding: 13px;
@@ -364,7 +352,6 @@ body {
   color: #ffffff;
 }
 
-/* Sağ Taraf: Ürün Detayları */
 .product-info-section {
   display: flex;
   flex-direction: column;
@@ -486,7 +473,6 @@ body {
   line-height: 1.6;
 }
 
-/* Mobil Cihazlar İçin Kesin Ölçülendirme */
 @media (max-width: 900px) {
   .product-layout {
     grid-template-columns: 1fr;
