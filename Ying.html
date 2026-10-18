@@ -8,7 +8,6 @@
     />
     <title>YING EKOLOJİK Modüler Açılabilir Ahşap Orta Sehpa - MESSER</title>
 
-    <!-- Model Viewer ve Font Bağlantıları -->
     <link rel="preconnect" href="https://ajax.googleapis.com" />
     <script
       type="module"
@@ -34,8 +33,24 @@
     <header class="navbar">
       <div class="logo">MESSER</div>
       <nav class="nav-links">
-        <a href="./index.html" class="nav-item">ZENNA Sehpa</a>
-        <a href="./ying.html" class="nav-item active">YING Modüler Sehpa</a>
+        <a
+          href="index.html"
+          onclick="
+            goToPage('index.html');
+            return false;
+          "
+          class="nav-item"
+          >ZENNA Sehpa</a
+        >
+        <a
+          href="ying.html"
+          onclick="
+            goToPage('ying.html');
+            return false;
+          "
+          class="nav-item active"
+          >YING Modüler Sehpa</a
+        >
         <a href="#" class="nav-item">Lambaderler</a>
         <a href="#" class="nav-item">Yan Sehpa</a>
         <a href="#" class="nav-item">Mutfak & Banyo</a>
@@ -54,13 +69,25 @@
       </div>
     </header>
 
-    <!-- Ürün Geçiş Menüsü -->
+    <!-- Hızlı Ürün Geçiş Menüsü -->
     <div class="product-switch-bar">
       <span class="switch-title">Modellerimiz:</span>
-      <a href="./index.html" class="switch-chip"
+      <a
+        href="index.html"
+        onclick="
+          goToPage('index.html');
+          return false;
+        "
+        class="switch-chip"
         ><i class="fa-solid fa-circle-check"></i> ZENNA Beyaz Sehpa</a
       >
-      <a href="./ying.html" class="switch-chip active"
+      <a
+        href="ying.html"
+        onclick="
+          goToPage('ying.html');
+          return false;
+        "
+        class="switch-chip active"
         ><i class="fa-solid fa-layer-group"></i> YING Modüler Sehpa</a
       >
     </div>
@@ -69,7 +96,6 @@
     <main class="product-layout">
       <!-- Sol Galeri Alanı -->
       <div class="product-gallery-section">
-        <!-- Sol Dikey Küçük Görseller -->
         <div class="thumb-column">
           <span class="thumb-label">Görseller</span>
           <div class="thumb-list">
@@ -85,7 +111,7 @@
           </div>
         </div>
 
-        <!-- Orta Büyük Görsel (Oransal ve Net) -->
+        <!-- Orta Büyük Görsel (Kırpmayan Oransal Tasarım) -->
         <div class="main-image-wrapper">
           <div class="image-box" id="imageBox">
             <img
@@ -104,12 +130,11 @@
             </button>
           </div>
 
-          <!-- Şeffaf AR Butonu -->
           <button class="ar-trigger-btn" onclick="startAR()">
             <i class="fa-solid fa-cube"></i> Odanda Gör (AR)
           </button>
 
-          <!-- On-Demand Hızlı AR Motoru -->
+          <!-- On-Demand AR Motoru (ying.glb & ying.usdz) -->
           <model-viewer
             id="ar-viewer"
             src="ying.glb"
@@ -130,7 +155,6 @@
           ></model-viewer>
         </div>
 
-        <!-- Sağ Büyütme Penceresi -->
         <div id="zoomResult" class="zoom-result-window"></div>
       </div>
 
@@ -192,6 +216,16 @@
     </main>
 
     <script>
+      function goToPage(target) {
+        let path = window.location.pathname;
+        if (path.endsWith(".html")) {
+          path = path.substring(0, path.lastIndexOf("/") + 1);
+        } else if (!path.endsWith("/")) {
+          path += "/";
+        }
+        window.location.href = window.location.origin + path + target;
+      }
+
       const images = ["ying1.webp", "ying2.webp"];
       let currentIndex = 0;
 
@@ -282,7 +316,6 @@
 
       setupZoom();
 
-      // iOS ve Android İçin Bellek Şişirmeyen AR Tetikleyici
       function startAR() {
         const viewer = document.getElementById("ar-viewer");
         const isIOS =

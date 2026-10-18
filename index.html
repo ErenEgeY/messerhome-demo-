@@ -6,9 +6,11 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0, user-scalable=no"
     />
-    <title>ZENNA EKOLOJİK Ahşap Dekoratif Orta Sehpa BEYAZ - MESSER</title>
+    <title>
+      ZENNA EKOLOJİK Ahşap Dekoratif Orta Sehpa BEYAZ (PAKET İÇİ QR VİDEO İLE
+      KURULUM) - MESSER
+    </title>
 
-    <!-- Model Viewer ve Fontlar -->
     <link rel="preconnect" href="https://ajax.googleapis.com" />
     <script
       type="module"
@@ -34,8 +36,24 @@
     <header class="navbar">
       <div class="logo">MESSER</div>
       <nav class="nav-links">
-        <a href="index.html" class="nav-item active">ZENNA Sehpa</a>
-        <a href="ying.html" class="nav-item">YING Modüler Sehpa</a>
+        <a
+          href="index.html"
+          onclick="
+            goToPage('index.html');
+            return false;
+          "
+          class="nav-item active"
+          >ZENNA Sehpa</a
+        >
+        <a
+          href="ying.html"
+          onclick="
+            goToPage('ying.html');
+            return false;
+          "
+          class="nav-item"
+          >YING Modüler Sehpa</a
+        >
         <a href="#" class="nav-item">Lambaderler</a>
         <a href="#" class="nav-item">Yan Sehpa</a>
         <a href="#" class="nav-item">Mutfak & Banyo</a>
@@ -57,10 +75,22 @@
     <!-- Hızlı Ürün Geçiş Menüsü -->
     <div class="product-switch-bar">
       <span class="switch-title">Modellerimiz:</span>
-      <a href="index.html" class="switch-chip active"
+      <a
+        href="index.html"
+        onclick="
+          goToPage('index.html');
+          return false;
+        "
+        class="switch-chip active"
         ><i class="fa-solid fa-circle-check"></i> ZENNA Beyaz Sehpa</a
       >
-      <a href="ying.html" class="switch-chip"
+      <a
+        href="ying.html"
+        onclick="
+          goToPage('ying.html');
+          return false;
+        "
+        class="switch-chip"
         ><i class="fa-solid fa-layer-group"></i> YING Modüler Sehpa</a
       >
     </div>
@@ -69,7 +99,6 @@
     <main class="product-layout">
       <!-- Sol Galeri Alanı -->
       <div class="product-gallery-section">
-        <!-- Sol Dikey Küçük Görseller -->
         <div class="thumb-column">
           <span class="thumb-label">Görseller</span>
           <div class="thumb-list">
@@ -85,13 +114,13 @@
           </div>
         </div>
 
-        <!-- Orta Büyük Görsel ve Büyüteç Lensi -->
         <div class="main-image-wrapper">
           <div class="image-box" id="imageBox">
             <img
               id="mainImage"
               src="image_2560.webp"
               alt="ZENNA Ekolojik Orta Sehpa"
+              class="crisp-render"
             />
             <div id="zoomLens" class="zoom-lens"></div>
 
@@ -103,12 +132,10 @@
             </button>
           </div>
 
-          <!-- Şeffaf AR Butonu -->
           <button class="ar-trigger-btn" onclick="startAR()">
             <i class="fa-solid fa-cube"></i> Odanda Gör (AR)
           </button>
 
-          <!-- On-Demand AR Motoru (sehpa.glb) -->
           <model-viewer
             id="ar-viewer"
             src="sehpa.glb"
@@ -129,7 +156,6 @@
           ></model-viewer>
         </div>
 
-        <!-- Sağ Tarafta Açılan Büyütme Penceresi -->
         <div id="zoomResult" class="zoom-result-window"></div>
       </div>
 
@@ -189,6 +215,17 @@
     </main>
 
     <script>
+      // Mobilde 404 hatasını kalıcı olarak engelleyen kesin sayfa yönlendirici
+      function goToPage(target) {
+        let path = window.location.pathname;
+        if (path.endsWith(".html")) {
+          path = path.substring(0, path.lastIndexOf("/") + 1);
+        } else if (!path.endsWith("/")) {
+          path += "/";
+        }
+        window.location.href = window.location.origin + path + target;
+      }
+
       const images = ["image_2560.webp", "image_1512.webp"];
       let currentIndex = 0;
 
@@ -279,7 +316,6 @@
 
       setupZoom();
 
-      // On-Demand Hızlı AR Tetikleyicisi
       function startAR() {
         const viewer = document.getElementById("ar-viewer");
         const isIOS =
