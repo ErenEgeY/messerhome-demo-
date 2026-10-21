@@ -8,15 +8,38 @@
   --transition: all 0.25s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
+/* Genel Kutu Modeli Sıfırlaması (Font tanımı buraya konmaz) */
 *,
 *::before,
 *::after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+/* Tipografi - FontAwesome ikonlarını ezmeyecek şekilde seçicilere atanır */
+body,
+button,
+input,
+textarea,
+select {
   font-family: "Plus Jakarta Sans", sans-serif;
 }
 
+/* FontAwesome 6 İkon Garanti Kuralı */
+.fa-solid,
+.fas {
+  font-family: "Font Awesome 6 Free" !important;
+  font-weight: 900 !important;
+}
+
+.fa-regular,
+.far {
+  font-family: "Font Awesome 6 Free" !important;
+  font-weight: 400 !important;
+}
+
+/* Donanımsal Yatay Kayma Engeli */
 html,
 body {
   width: 100%;
@@ -28,6 +51,7 @@ body {
   color: var(--text-primary);
 }
 
+/* Üst Duyuru Çubuğu */
 .top-announcement {
   width: 100%;
   background-color: var(--accent-dark);
@@ -39,6 +63,7 @@ body {
   letter-spacing: 0.8px;
 }
 
+/* Navigasyon Alanı */
 .navbar {
   width: 100%;
   display: flex;
@@ -115,6 +140,7 @@ body {
   transition: var(--transition);
 }
 
+/* Üst Ürün Geçiş Menüsü (Çipler) */
 .product-switch-bar {
   max-width: 1300px;
   width: 100%;
@@ -135,15 +161,16 @@ body {
 .switch-chip {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
   text-decoration: none;
   font-size: 12.5px;
   font-weight: 600;
-  padding: 7px 14px;
+  padding: 8px 16px;
   border-radius: 20px;
   border: 1px solid var(--border-light);
   color: var(--text-muted);
   background-color: #fafafa;
+  cursor: pointer;
   transition: var(--transition);
 }
 
@@ -160,6 +187,7 @@ body {
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.12);
 }
 
+/* Ana Düzen Izgarası */
 .product-layout {
   max-width: 1300px;
   width: 100%;
@@ -171,6 +199,7 @@ body {
   position: relative;
 }
 
+/* Sol Galeri Bölümü */
 .product-gallery-section {
   display: flex;
   gap: 16px;
@@ -179,6 +208,7 @@ body {
   min-width: 0;
 }
 
+/* Dikey Küçük Görsel Listesi */
 .thumb-column {
   display: flex;
   flex-direction: column;
@@ -228,6 +258,7 @@ body {
   object-fit: contain;
 }
 
+/* Ana Görsel Kutusu */
 .main-image-wrapper {
   flex: 1;
   display: flex;
@@ -264,6 +295,7 @@ body {
   image-rendering: -webkit-optimize-contrast;
 }
 
+/* Slider Gezinme Okları */
 .slider-arrow {
   position: absolute;
   top: 50%;
@@ -295,6 +327,7 @@ body {
   right: 10px;
 }
 
+/* Flyout Büyüteç Öğeleri */
 .zoom-lens {
   position: absolute;
   width: 140px;
@@ -330,6 +363,7 @@ body {
   display: block;
 }
 
+/* AR Tetikleyici Buton */
 .ar-trigger-btn {
   width: 100%;
   padding: 13px;
@@ -352,6 +386,7 @@ body {
   color: #ffffff;
 }
 
+/* Sağ Bilgi Bölümü */
 .product-info-section {
   display: flex;
   flex-direction: column;
@@ -385,6 +420,8 @@ body {
 .stars {
   color: #ffa41c;
   font-size: 13px;
+  display: flex;
+  gap: 2px;
 }
 
 .rating-count {
@@ -456,7 +493,7 @@ body {
 .badge-item {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
   font-size: 12px;
   color: #444444;
 }
@@ -473,6 +510,7 @@ body {
   line-height: 1.6;
 }
 
+/* Mobil Cihaz Kuralları */
 @media (max-width: 900px) {
   .product-layout {
     grid-template-columns: 1fr;
