@@ -17,19 +17,17 @@ const zoomLens = document.getElementById("zoomLens");
 const zoomResult = document.getElementById("zoomResult");
 const arViewer = document.getElementById("ar-viewer");
 
-// URL'den Ürün ID'sini Oku
+// URL'den Ürün ID'sini Al
 function getProductIdFromUrl() {
   const params = new URLSearchParams(window.location.search);
   return params.get("id") || "zenna";
 }
 
-// 2. SAYFA YENİLEMEDEN ANINDA GEÇİŞ (SPA MOTORU)
+// Sayfa Yenilenmeden Anlık Ürün Değişimi (SPA Motoru)
 async function switchProduct(productId) {
-  // URL'i sayfayı yenilemeden güncelle (Tarayıcı geçmişi bozulmaz)
   const newUrl = `${window.location.pathname}?id=${productId}`;
   window.history.pushState({ id: productId }, "", newUrl);
 
-  // Buton aktifliklerini anında değiştir
   document
     .querySelectorAll(".nav-item, .switch-chip")
     .forEach((el) => el.classList.remove("active"));
@@ -41,7 +39,7 @@ async function switchProduct(productId) {
   await fetchAndRender(productId);
 }
 
-// 3. VERİ ÇEKME VE BASMA
+// Veritabanından Çek ve Ekrana Bas
 async function fetchAndRender(productId) {
   try {
     const { data, error } = await supabaseClient
@@ -52,7 +50,7 @@ async function fetchAndRender(productId) {
 
     if (error || !data) {
       console.warn(
-        "Supabase verisi alınamadı, yedek şablondan yükleniyor:",
+        "Supabase verisi alınamadı, yedek veri şablonu yükleniyor:",
         error,
       );
       loadFallbackProduct(productId);
@@ -67,20 +65,20 @@ async function fetchAndRender(productId) {
   }
 }
 
-// Supabase'de gecikme olsa bile ekranın asla kırık kalmamasını sağlayan yerel koruma
+// Yerel Yedek Veri (Offline veya Veritabanı Gecikmesi Durumunda Asla Boş Kalmaz)
 function loadFallbackProduct(id) {
   const fallbacks = {
     zenna: {
       id: "zenna",
-      title:
-        "ZENNA EKOLOJİK Ahşap Dekoratif Orta Sehpa BEYAZ (PAKET İÇİ QR VİDEO İLE KURULUM)",
-      brand: "CANMODİ",
+      title: "LEGACY ZENNA Masif Detaylı İskandinav Orta Sehpa (Mat Beyaz)",
+      brand: "LEGACY HOME",
       price: 349.0,
       rating: 4.8,
       review_count: 48,
       description:
-        "Özenle tasarlanan ZENNA Orta Sehpa; dayanıklı gövdesi ve ekolojik ahşap latalarıyla yaşam alanlarınıza şıklık katar.",
-      specs: "Derinlik: 60cm | Genişlik: 90cm | Yükseklik: 42cm",
+        "Legacy Home imzasını taşıyan Zenna Serisi; sürdürülebilir doğal ahşap dokusu ve modern minimalist hatlarıyla evinize zarif bir derinlik katar.",
+      specs:
+        "Genişlik: 90 cm | Derinlik: 60 cm | Yükseklik: 42 cm | E1 Kalite Masif Ahşap",
       images: [
         "assets/images/image_2560.webp",
         "assets/images/image_1512.webp",
@@ -90,15 +88,15 @@ function loadFallbackProduct(id) {
     },
     ying: {
       id: "ying",
-      title:
-        "YING EKOLOJİK Modüler Açılabilir Ahşap Dekoratif Orta Sehpa (PAKET İÇİ QR VİDEO İLE KURULUM)",
-      brand: "CANMODİ",
+      title: "LEGACY YING Modüler Açılabilir Çok Fonksiyonlu Orta Sehpa",
+      brand: "LEGACY HOME",
       price: 399.0,
       rating: 5.0,
       review_count: 32,
       description:
-        "E1 normları dahilinde kanserojen madde içermez. Orta sehpa profilleri 1. Sınıf krafttan üretilmiştir.",
-      specs: "Derinlik: 70cm | Genişlik: 70cm | Yükseklik: 38cm",
+        "Legacy Home tasarım stüdyosunun dinamik yaşam alanları için geliştirdiği Ying Modüler Sehpa; açılabilir çift kademeli yapısıyla alanınızı optimize eder.",
+      specs:
+        "Genişlik: 70 cm | Derinlik: 70 cm | Yükseklik: 38 cm | Akıllı Modüler Kilit",
       images: ["assets/images/ying1.webp", "assets/images/ying2.webp"],
       glb_url: "assets/models/ying.glb",
       usdz_url: "assets/models/ying.usdz",
@@ -110,9 +108,9 @@ function loadFallbackProduct(id) {
   renderProductData(selected);
 }
 
-// 4. EKRANI DOLDURMA
+// Arayüz Elemanlarını Doldurma
 function renderProductData(prod) {
-  document.title = `${prod.title} - MESSER`;
+  document.title = `${prod.title} - LEGACY HOME`;
   document.getElementById("productBrand").innerText = prod.brand;
   document.getElementById("productTitle").innerText = prod.title;
   document.getElementById("productPrice").innerText =
@@ -123,9 +121,11 @@ function renderProductData(prod) {
   document.getElementById("productSpecs").innerHTML =
     `<strong>Teknik Ölçüler:</strong> ${prod.specs || ""}`;
   document.getElementById("variantLabel").innerText =
-    prod.id === "zenna" ? "Beyaz / Ahşap" : "Doğal Ahşap / Siyah Profil";
+    prod.id === "zenna"
+      ? "Mat Beyaz / Doğal Ahşap"
+      : "Doğal Meşe / Antrasit Gövde";
 
-  // 3D Model
+  // 3D Model Dosyası
   arViewer.setAttribute("src", prod.glb_url);
 
   // Görseller
@@ -146,6 +146,7 @@ function renderProductData(prod) {
   updateGallery(0);
 }
 
+// Galeri ve Slider
 function updateGallery(index) {
   if (!activeImages.length) return;
   currentIndex = index;
@@ -173,7 +174,7 @@ function nextImage(e) {
   updateGallery(currentIndex);
 }
 
-// 5. BÜYÜTEÇ SİSTEMİ
+// Flyout Büyüteç Motoru
 function setupZoom() {
   imageBox.addEventListener("mouseenter", (e) => {
     if (window.innerWidth <= 900) return;
@@ -226,7 +227,7 @@ function setupZoom() {
   });
 }
 
-// 6. AR TETİKLEYİCİSİ
+// iOS Quick Look AR Motoru (Cache Buster ile)
 function startAR() {
   if (!currentProduct) return;
 
@@ -250,13 +251,13 @@ function startAR() {
   }
 }
 
-// Tarayıcı Geri/İleri Tuşları Desteği
+// Tarayıcı İleri/Geri Butonları
 window.addEventListener("popstate", () => {
   const id = getProductIdFromUrl();
   switchProduct(id);
 });
 
-// İlk Başlatma
+// Başlatma
 setupZoom();
 window.addEventListener("DOMContentLoaded", () => {
   const initialId = getProductIdFromUrl();

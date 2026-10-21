@@ -6,22 +6,21 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"
     />
-    <title>MESSER - Ürün Detayı</title>
+    <title>LEGACY HOME - Yaşam Alanına Özel Tasarımlar</title>
 
-    <!-- Kütüphaneler -->
+    <!-- 3D ve Supabase Kütüphaneleri -->
     <script
       type="module"
       src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"
     ></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
+    <!-- Stiller -->
     <link rel="stylesheet" href="css/style.css" />
     <link
       href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
-
-    <!-- İkonların kare çıkmasını engelleyen garantili FontAwesome CDN -->
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.2/css/all.min.css"
@@ -29,12 +28,13 @@
   </head>
   <body>
     <div class="top-announcement">
-      TÜM ÜRÜNLERDE GEÇERLİ İLK SİPARİŞİNİZE ÖZEL SEPETTE %10 İNDİRİM
+      LEGACY HOME YENİ SEZON | TÜM SİPARİŞLERDE ÜCRETSİZ KARGO VE SEPETTE %15
+      İNDİRİM
     </div>
 
     <!-- Header / Navbar -->
     <header class="navbar">
-      <div class="logo">MESSER</div>
+      <div class="logo">LEGACY HOME</div>
       <nav class="nav-links">
         <a
           href="javascript:void(0)"
@@ -48,15 +48,15 @@
           onclick="switchProduct('ying')"
           class="nav-item"
           id="nav-ying"
-          >YING Modüler Sehpa</a
+          >YING Modüler</a
         >
-        <a href="#" class="nav-item">Lambaderler</a>
-        <a href="#" class="nav-item">Yan Sehpa</a>
-        <a href="#" class="nav-item">Kitaplık</a>
+        <a href="#" class="nav-item">Aydınlatma</a>
+        <a href="#" class="nav-item">Yan Sehpalar</a>
+        <a href="#" class="nav-item">Koleksiyonlar</a>
       </nav>
       <div class="nav-icons">
         <div class="search-box">
-          <input type="text" placeholder="Ara..." />
+          <input type="text" placeholder="Koleksiyonda ara..." />
           <i class="fa-solid fa-magnifying-glass"></i>
         </div>
         <i class="fa-regular fa-user icon-btn"></i>
@@ -65,16 +65,16 @@
       </div>
     </header>
 
-    <!-- Dinamik Ürün Seçim Çipleri (Sayfa Yenilenmeden Anında Geçer) -->
+    <!-- Ürün Seçim Çipleri -->
     <div class="product-switch-bar">
-      <span class="switch-title">Modellerimiz:</span>
+      <span class="switch-title">Koleksiyon Modelleri:</span>
       <button
         type="button"
         class="switch-chip"
         id="chip-zenna"
         onclick="switchProduct('zenna')"
       >
-        <i class="fa-solid fa-circle-check"></i> ZENNA Beyaz Sehpa
+        <i class="fa-solid fa-circle-check"></i> LEGACY ZENNA Sehpa
       </button>
       <button
         type="button"
@@ -82,7 +82,7 @@
         id="chip-ying"
         onclick="switchProduct('ying')"
       >
-        <i class="fa-solid fa-layer-group"></i> YING Modüler Sehpa
+        <i class="fa-solid fa-layer-group"></i> LEGACY YING Modüler
       </button>
     </div>
 
@@ -90,7 +90,7 @@
       <!-- Galeri Alanı -->
       <div class="product-gallery-section">
         <div class="thumb-column">
-          <span class="thumb-label">Görseller</span>
+          <span class="thumb-label">Galeri</span>
           <div class="thumb-list" id="thumbList"></div>
         </div>
 
@@ -107,27 +107,27 @@
             <button
               class="slider-arrow prev-arrow"
               onclick="prevImage(event)"
-              aria-label="Önceki"
+              aria-label="Önceki Görsel"
             >
               <i class="fa-solid fa-chevron-left"></i>
             </button>
             <button
               class="slider-arrow next-arrow"
               onclick="nextImage(event)"
-              aria-label="Sonraki"
+              aria-label="Sonraki Görsel"
             >
               <i class="fa-solid fa-chevron-right"></i>
             </button>
           </div>
 
           <button class="ar-trigger-btn" onclick="startAR()">
-            <i class="fa-solid fa-cube"></i> Odanda Gör (AR)
+            <i class="fa-solid fa-cube"></i> Evinde Canlı Gör (AR)
           </button>
 
           <model-viewer
             id="ar-viewer"
             src=""
-            alt="3D Modeli"
+            alt="3D Mobilya Modeli"
             ar
             ar-modes="quick-look scene-viewer webxr"
             ar-scale="auto"
@@ -149,12 +149,10 @@
         <div id="zoomResult" class="zoom-result-window"></div>
       </div>
 
-      <!-- Ürün Bilgi Alanı -->
+      <!-- Ürün Detayları -->
       <div class="product-info-section">
-        <span class="brand-subtitle" id="productBrand">CANMODİ</span>
-        <h1 class="product-title" id="productTitle">
-          ZENNA EKOLOJİK Ahşap Dekoratif Orta Sehpa
-        </h1>
+        <span class="brand-subtitle" id="productBrand">LEGACY HOME</span>
+        <h1 class="product-title" id="productTitle">Yükleniyor...</h1>
 
         <div class="rating-row">
           <div class="stars" id="starContainer">
@@ -174,9 +172,9 @@
         </div>
 
         <div class="variant-selection">
-          <label>Renk / Model</label>
+          <label>Materyal & Renk</label>
           <button class="variant-btn active" id="variantLabel">
-            Beyaz / Ahşap
+            Mat Beyaz / Doğal Ahşap
           </button>
         </div>
 
@@ -187,16 +185,20 @@
         <div class="assurance-badges">
           <div class="badge-item">
             <i class="fa-solid fa-shield-halved"></i>
-            <span>%100 Güvenli Alışveriş</span>
+            <span>Legacy Güvencesi</span>
+          </div>
+          <div class="badge-item">
+            <i class="fa-solid fa-truck-fast"></i>
+            <span>Ücretsiz Hızlı Sevkiyat</span>
           </div>
           <div class="badge-item">
             <i class="fa-solid fa-rotate-left"></i>
-            <span>14 gün içinde iade garantisi</span>
+            <span>30 Gün Koşulsuz İade</span>
           </div>
         </div>
 
         <div class="product-description-box">
-          <h3>Ürün Açıklaması</h3>
+          <h3>Tasarım & Detaylar</h3>
           <p id="productDescription"></p>
           <br />
           <p id="productSpecs"><strong>Teknik Ölçüler:</strong> -</p>
