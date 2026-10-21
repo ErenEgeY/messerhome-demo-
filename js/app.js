@@ -5,28 +5,31 @@ const SUPABASE_ANON_KEY =
 
 const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-// Sayfa Değişkenleri
+// Sayfa Durumu
 let currentProduct = null;
 let activeImages = [];
 let currentIndex = 0;
 
+// DOM Elemanları
 const mainImage = document.getElementById("mainImage");
 const imageBox = document.getElementById("imageBox");
 const zoomLens = document.getElementById("zoomLens");
 const zoomResult = document.getElementById("zoomResult");
 const arViewer = document.getElementById("ar-viewer");
 
-// URL'den Ürün ID'sini Al
+// URL'den Ürün ID'sini Oku
 function getProductIdFromUrl() {
   const params = new URLSearchParams(window.location.search);
   return params.get("id") || "zenna";
 }
 
-// Supabase'den Veri Çek ve Sayfayı Doldur
-async function loadProduct() {
-  const productId = getProductIdFromUrl();
+// 2. SAYFA YENİLEMEDEN ANINDA GEÇİŞ (SPA MOTORU)
+async function switchProduct(productId) {
+  // URL'i sayfayı yenilemeden güncelle (Tarayıcı geçmişi bozulmaz)
+  const newUrl = `${window.location.pathname}?id=${productId}`;
+  window.history.pushState({ id: productId }, "", newUrl);
 
-  // Aktif buton/çip işaretlemesi
+  // Buton aktifliklerini anında değiştir
   document
     .querySelectorAll(".nav-item, .switch-chip")
     .forEach((el) => el.classList.remove("active"));
@@ -35,6 +38,11 @@ async function loadProduct() {
   if (activeNav) activeNav.classList.add("active");
   if (activeChip) activeChip.classList.add("active");
 
+  await fetchAndRender(productId);
+}
+
+// 3. VERİ ÇEKME VE BASMA
+async function fetchAndRender(productId) {
   try {
     const { data, error } = await supabaseClient
       .from("products")
@@ -43,26 +51,66 @@ async function loadProduct() {
       .single();
 
     if (error || !data) {
-      console.error(
-        "Supabase Hatası:",
-        error ? error.message : "Veri bulunamadı",
-        "| Kod:",
-        error ? error.code : "",
-        "| İpucu:",
-        error ? error.hint : "",
+      console.warn(
+        "Supabase verisi alınamadı, yedek şablondan yükleniyor:",
+        error,
       );
-      document.getElementById("productTitle").innerText = "Ürün Bulunamadı";
+      loadFallbackProduct(productId);
       return;
     }
 
     currentProduct = data;
     renderProductData(data);
   } catch (err) {
-    console.error("Supabase bağlantı hatası:", err);
+    console.error("Bağlantı hatası:", err);
+    loadFallbackProduct(productId);
   }
 }
 
-// DOM Elemanlarını Güncelle
+// Supabase'de gecikme olsa bile ekranın asla kırık kalmamasını sağlayan yerel koruma
+function loadFallbackProduct(id) {
+  const fallbacks = {
+    zenna: {
+      id: "zenna",
+      title:
+        "ZENNA EKOLOJİK Ahşap Dekoratif Orta Sehpa BEYAZ (PAKET İÇİ QR VİDEO İLE KURULUM)",
+      brand: "CANMODİ",
+      price: 349.0,
+      rating: 4.8,
+      review_count: 48,
+      description:
+        "Özenle tasarlanan ZENNA Orta Sehpa; dayanıklı gövdesi ve ekolojik ahşap latalarıyla yaşam alanlarınıza şıklık katar.",
+      specs: "Derinlik: 60cm | Genişlik: 90cm | Yükseklik: 42cm",
+      images: [
+        "assets/images/image_2560.webp",
+        "assets/images/image_1512.webp",
+      ],
+      glb_url: "assets/models/sehpa.glb",
+      usdz_url: "assets/models/sehpa.usdz",
+    },
+    ying: {
+      id: "ying",
+      title:
+        "YING EKOLOJİK Modüler Açılabilir Ahşap Dekoratif Orta Sehpa (PAKET İÇİ QR VİDEO İLE KURULUM)",
+      brand: "CANMODİ",
+      price: 399.0,
+      rating: 5.0,
+      review_count: 32,
+      description:
+        "E1 normları dahilinde kanserojen madde içermez. Orta sehpa profilleri 1. Sınıf krafttan üretilmiştir.",
+      specs: "Derinlik: 70cm | Genişlik: 70cm | Yükseklik: 38cm",
+      images: ["assets/images/ying1.webp", "assets/images/ying2.webp"],
+      glb_url: "assets/models/ying.glb",
+      usdz_url: "assets/models/ying.usdz",
+    },
+  };
+
+  const selected = fallbacks[id] || fallbacks.zenna;
+  currentProduct = selected;
+  renderProductData(selected);
+}
+
+// 4. EKRANI DOLDURMA
 function renderProductData(prod) {
   document.title = `${prod.title} - MESSER`;
   document.getElementById("productBrand").innerText = prod.brand;
@@ -77,10 +125,10 @@ function renderProductData(prod) {
   document.getElementById("variantLabel").innerText =
     prod.id === "zenna" ? "Beyaz / Ahşap" : "Doğal Ahşap / Siyah Profil";
 
-  // 3D Model Bağlantısı
+  // 3D Model
   arViewer.setAttribute("src", prod.glb_url);
 
-  // Görselleri Render Et
+  // Görseller
   activeImages = prod.images;
   currentIndex = 0;
 
@@ -98,7 +146,6 @@ function renderProductData(prod) {
   updateGallery(0);
 }
 
-// Galeri ve Slider Kontrolleri
 function updateGallery(index) {
   if (!activeImages.length) return;
   currentIndex = index;
@@ -126,7 +173,7 @@ function nextImage(e) {
   updateGallery(currentIndex);
 }
 
-// Flyout Masaüstü Zoom
+// 5. BÜYÜTEÇ SİSTEMİ
 function setupZoom() {
   imageBox.addEventListener("mouseenter", (e) => {
     if (window.innerWidth <= 900) return;
@@ -179,7 +226,7 @@ function setupZoom() {
   });
 }
 
-// iOS Quick Look AR Motoru
+// 6. AR TETİKLEYİCİSİ
 function startAR() {
   if (!currentProduct) return;
 
@@ -203,5 +250,15 @@ function startAR() {
   }
 }
 
+// Tarayıcı Geri/İleri Tuşları Desteği
+window.addEventListener("popstate", () => {
+  const id = getProductIdFromUrl();
+  switchProduct(id);
+});
+
+// İlk Başlatma
 setupZoom();
-window.addEventListener("DOMContentLoaded", loadProduct);
+window.addEventListener("DOMContentLoaded", () => {
+  const initialId = getProductIdFromUrl();
+  switchProduct(initialId);
+});
